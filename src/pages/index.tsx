@@ -1,12 +1,10 @@
-import React from 'react';
 import Head from "next/head";
-import { Button, theme } from 'antd';
-import { Flex, Layout, Menu } from 'antd';
-import SimpleForm from '../components/SimpleForm';
+import { theme } from 'antd';
+import { Flex, Layout } from 'antd';
 import { TonConnectButton } from "@tonconnect/ui-react";
 import TonConnectForm from "@/components/TonConnectForm";
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Footer, Content } = Layout;
 
 const HomePage: React.FC = () => {
   const {

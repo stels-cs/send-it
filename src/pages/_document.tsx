@@ -1,4 +1,3 @@
-import React from 'react';
 import { createCache, extractStyle, StyleProvider } from '@ant-design/cssinjs';
 import Document, { Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps } from "next/document";
 

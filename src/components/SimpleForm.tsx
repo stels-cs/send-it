@@ -1,4 +1,3 @@
-import React from 'react';
 import { Form, Input, Button } from 'antd';
 
 interface FormValues {
@@ -47,4 +46,4 @@ const SimpleForm: React.FC = () => {
   );
 };
 
-export default SimpleForm; 
+export default SimpleForm;
