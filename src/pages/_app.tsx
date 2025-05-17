@@ -1,13 +1,16 @@
 import "@/styles/globals.css";
-import { ConfigProvider } from 'antd';
+import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import type { AppProps } from "next/app";
-import theme from '../themeConfig';
-import { TonConnectUIProvider } from '@tonconnect/ui-react';
+import dynamic from "next/dynamic";
+
+const AntdProvider = dynamic(() => import("../components/AntdProvider"), {
+  ssr: false,
+});
 
 export default function App({ Component, pageProps }: AppProps) {
-  return  <ConfigProvider theme={theme}>
+  return <AntdProvider>
     <TonConnectUIProvider manifestUrl="https://stels-cs.github.io/tcm/manifest.json">
-    <Component {...pageProps} />
+      <Component {...pageProps} />
     </TonConnectUIProvider>
-  </ConfigProvider>;
+  </AntdProvider>;
 }
