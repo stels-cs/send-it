@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 const MainPage = dynamic(() => import("../components/MainPage"), {
   ssr: false,
 });
-const TonConnectForm = dynamic(() => import("../components/TonConnectForm"), {
+const NftTransferForm = dynamic(() => import("../components/NftTransferForm"), {
   ssr: false,
 });
 
@@ -14,13 +14,13 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Send it</title>
-        <meta name="description" content="Send random transaction via Ton connect" />
+        <title>NFT bad transfer</title>
+        <meta name="description" content="Layout for nft transfer bug" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainPage>
-        <TonConnectForm />
+        <NftTransferForm />
       </MainPage>
     </>
   );

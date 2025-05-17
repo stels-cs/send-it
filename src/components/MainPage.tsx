@@ -1,13 +1,9 @@
 import { Flex, Layout, theme } from "antd";
-import React from "react";
+import React, { type PropsWithChildren } from "react";
 import { TonConnectButton } from "@tonconnect/ui-react";
-import TonConnectForm from "@/components/TonConnectForm";
-// import { theme } from 'antd';
-// import { TonConnectButton } from "@tonconnect/ui-react";
-// import TonConnectForm from "@/components/TonConnectForm";
 const {Header,Content,Footer} = Layout
 
-const MainPage: React.FC = () => {
+const MainPage: React.FC<PropsWithChildren> = (props) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -22,7 +18,7 @@ const MainPage: React.FC = () => {
           <Content>
             <div style={{maxWidth: '800px', background:colorBgContainer,borderRadius: borderRadiusLG,
               padding: '12px 24px', margin: '12px auto'}}>
-              <TonConnectForm />
+              {props.children}
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
