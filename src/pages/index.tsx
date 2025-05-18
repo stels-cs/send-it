@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
       <Head>
         <title>Send it</title>
         <meta name="description" content="Send random transaction via Ton connect" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainPage>

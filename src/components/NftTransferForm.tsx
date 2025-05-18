@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Alert, Button, Form, Input } from 'antd';
-import { useTonWallet } from "@tonconnect/ui-react";
+import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
 import { SendTransactionRequest } from "@tonconnect/sdk";
 import { Address, toNano } from "@ton/core";
 import { NftItemMessages } from "@/messages";
@@ -14,10 +14,11 @@ interface FormValues {
 const NftTransferForm: React.FC = () => {
   const router = useRouter();
   const [ form ] = Form.useForm<FormValues>();
-  // const [ tonConnectUI ] = useTonConnectUI();
+  const [ tonConnectUI ] = useTonConnectUI();
   const wallet = useTonWallet();
   const [ loading, setLoading ] = useState(false);
   const [ error, setError ] = useState<null | unknown>(null);
+  const refHack = useRef({exportHack:false})
 
 
   const onFinish = (values: FormValues) => {
@@ -49,13 +50,17 @@ const NftTransferForm: React.FC = () => {
       }
       console.info('Payload', tx);
 
-      await router.push({
-        pathname: '/',
-        query: {
-          tx: JSON.stringify(tx)
-        }
-      })
-      // await tonConnectUI.sendTransaction(tx, { modals: 'all' })
+      if (refHack.current.exportHack) {
+        refHack.current.exportHack = false
+        await router.push({
+          pathname: '/',
+          query: {
+            tx: JSON.stringify(tx)
+          }
+        })
+        return
+      }
+      await tonConnectUI.sendTransaction(tx, { modals: 'all' })
     }
 
     setLoading(true)
@@ -116,6 +121,13 @@ const NftTransferForm: React.FC = () => {
         <Form.Item>
           <Button loading={loading} type="primary" htmlType="submit">
             Send
+          </Button>
+        </Form.Item>
+        <Form.Item>
+          <Button onClick={() => {
+            refHack.current.exportHack = true
+          }} loading={loading} type="default" htmlType="submit">
+            Export
           </Button>
         </Form.Item>
       </div>
