@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Button, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { useRouter } from "next/router";
 import { createDefaultTransactionPayload, exportFormData } from "@/init";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import { SendTransactionRequest } from "@tonconnect/sdk";
+import ResultAlert from "@/components/ResultAlert";
+import ErrorAlert from "@/components/ErrorAlert";
 
 interface FormValues {
   payload: string;
@@ -17,6 +19,7 @@ const TonConnectForm: React.FC = () => {
   const [ loading, setLoading ] = useState(false);
   const [ error, setError ] = useState<null | unknown>(null);
   const [ exportData, setExport ] = useState<null | string>(null);
+  const [ result, setResult ] = useState<null | string>(null);
 
   useEffect(() => {
     const payload = createDefaultTransactionPayload(tx);
@@ -30,7 +33,12 @@ const TonConnectForm: React.FC = () => {
 
     const data = JSON.parse(values.payload);
     setLoading(true)
-    tonConnectUI.sendTransaction(data as SendTransactionRequest, { modals: 'all' })
+    setResult(null)
+    tonConnectUI.sendTransaction(data as SendTransactionRequest, { modals: [ 'before' ] })
+      .then(res => {
+        console.log('response', res)
+        setResult(res.boc)
+      })
       .catch(e => {
         setError(e)
         console.error("sendTransaction failed", e)
@@ -45,16 +53,12 @@ const TonConnectForm: React.FC = () => {
       layout="vertical"
       onFinish={onFinish}
     >
-      {!!error && <Alert
-        message={error instanceof Error ? error.message : JSON.stringify(error)}
-        description={error instanceof Error ? error.stack : ''}
-        type="error"
-        closable
-        onClose={() => setLoading(false)}
-      />}
+      {!!error && <ErrorAlert error={error} clearError={() => setError(null)} />}
+      {!!result && <ResultAlert boc={result} />}
       <Form.Item
-        label="Transaction"
+        label="Transaction JSON payload"
         name="payload"
+        style={{ marginTop: "15px" }}
         rules={[ { required: true, message: 'Fill json payload' } ]}
       >
         <Input.TextArea rows={15}
