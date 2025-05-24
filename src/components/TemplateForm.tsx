@@ -12,6 +12,7 @@ import ErrorAlert from "@/components/ErrorAlert";
 import { useShareAndRestoreData } from "@/hooks/useShareAndRestoreData";
 import ShareCopyButton from "@/components/ShareCopyButton";
 import { RJSFSchema } from "@rjsf/utils";
+import { t } from "@/getLang";
 
 const { Paragraph, Title } = Typography
 
@@ -52,12 +53,18 @@ const TemplateForm: React.FC<{ template: TemplateType }> = ({ template }) => {
       <div style={{}}>
         <AntdForm.Item>
           <Button loading={loading} type="primary" htmlType="submit">
-            Send transaction
+            {t({
+              en:'Send Transaction',
+              ru:'Отправить транзакцию',
+            })}
           </Button>
         </AntdForm.Item>
         <AntdForm.Item>
           <Button onClick={onExportCLick} loading={loading} type="default" htmlType="submit">
-            Export to raw JSON
+            {t({
+                en:'Export Transaction to JSON',
+                ru:'Экспортировать транзакцию в JSON',
+              })}
           </Button>
         </AntdForm.Item>
       </div>

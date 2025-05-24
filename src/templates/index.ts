@@ -2,11 +2,15 @@ import { NftCollectionTransfer } from "@/templates/NftCollectionTransfer";
 import { TemplateType } from "./type";
 import { TonDNSBalanceRelease } from "@/templates/TonDNSBalanceRelease";
 import { TonDNSSetWallet } from "@/templates/TonDNSSetWallet";
+import { NftCollectionClaimBalance } from "@/templates/NftCollectionClaimBalance";
+import { SendOpCode } from "@/templates/SendOpCode";
 
 export const templatesList = [
   NftCollectionTransfer,
   TonDNSBalanceRelease,
   TonDNSSetWallet,
+  NftCollectionClaimBalance,
+  SendOpCode,
 ]
 
 export function getTemplateById(id:string): { type: "ok"; template: TemplateType } | { type: "error"; reason: string } {

@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { Cell } from "@ton/core";
 import { Typography, Card } from "antd";
+import { t } from "@/getLang";
 const {Link,Paragraph} = Typography
 
 
@@ -18,11 +19,26 @@ const ResultAlert: React.FC<{ boc: string }> = ({ boc }) => {
 
 
 
-  return <Card size="small" title="Transaction sent!">
-    <Paragraph>Link: <Link href={result.url} target='_blank'>{result.url}</Link></Paragraph>
-    <Paragraph>external hash base64: <code>{result.hashBase64}</code></Paragraph>
-    <Paragraph>external hash hex: <code>{result.hashHex}</code></Paragraph>
-    <Paragraph>external boc: <pre>{result.boc}</pre></Paragraph>
+  return <Card size="small" title={t({
+    en:'Transaction sent successfully!',
+    ru: 'Транзакция успешно отправлена!'
+  })}>
+    <Paragraph>{t({
+      en:"This is a link to the transaction in the explorer. It may take up to 30 seconds to appear",
+      ru: 'Это ссылка на транзакцию в эксплорере, транзакция появляется не мгновенно, эта ссылка заработает через полминуты'
+    })}: <Link href={result.url} target='_blank'>{result.url}</Link></Paragraph>
+    <Paragraph>{t({
+      en:'External message hash (base64)',
+      ru:'Хеш external сообщения base64'
+    })}: <code>{result.hashBase64}</code></Paragraph>
+    <Paragraph>{t({
+      en:'External message hash (hex)',
+      ru:'Хеш external сообщения hex',
+    })}: <code>{result.hashHex}</code></Paragraph>
+    <Paragraph>{t({
+      en:'External message BoC (base64)',
+      ru:'BoC external сообщения base64',
+    })}: <pre>{result.boc}</pre></Paragraph>
   </Card>
 }
 
