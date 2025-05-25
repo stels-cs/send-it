@@ -28,6 +28,9 @@ const Parser = z.object({
       ru: 'Рекомендуется указать значение на 0.02 TON меньше, чем баланс коллекции',
       en: 'It’s recommended to enter a value 0.02 TON less than the collection balance'
     })
+  }),
+  disintar: z.boolean().meta({
+    title: t({en: 'Collection by Disintar',ru:'Коллекция была создана Disintar'})
   })
 })
 
@@ -49,12 +52,16 @@ export const NftCollectionClaimBalance: TemplateType = {
       .storeUint(getQueryId(), 64)
       .storeUint(BigInt(data.nftIndex), 64)
       .storeCoins(toNano(data.amount))
-      .storeRef(new Cell()).endCell();
+      .storeRef(new Cell())
+
+    if (data.disintar) {
+      body.storeAddress(null);
+    }
 
     return createDefaultTonTransaction({
       to: Address.parse(data.collectionAddress),
       amount: toNano('0.05'),
-      payload: body
+      payload: body.endCell()
     });
   }
 }
