@@ -38,8 +38,8 @@ export const NftCollectionClaimBalance: TemplateType = {
     ru:'Забрать тоны с баланса NFT коллекции'
   }),
   description: t({
-    en: "Используйте эту форму, чтобы забрать с баланса NFT-коллекции излишки TON. Эта форма отправляет запрос на минтинг NFT в коллекции. В этом запросе есть поле (Количество TON) — это количество будет перемещено с баланса коллекции на баланс NFT. Далее передайте NFT самому себе, после этого лишние тоны вернутся на ваш кошелёк. Для SBT используйте форму для отправки op-кода op::take_excess",
-    ru: 'Use this form to withdraw excess TON from the NFT collection balance. It sends a mint request to the collection. The request has a “TON amount” field — that amount will move from the collection balance to the NFT balance. Then transfer the NFT to yourself — the excess TON will return to your wallet. For SBT, use the form to send op::take_excess opcode.'
+    ru: "Используйте эту форму, чтобы забрать с баланса NFT-коллекции излишки TON. Эта форма отправляет запрос на минтинг NFT в коллекции. В этом запросе есть поле (Количество TON) — это количество будет перемещено с баланса коллекции на баланс NFT. Далее передайте NFT самому себе, после этого лишние тоны вернутся на ваш кошелёк. Для SBT используйте форму для отправки op-кода op::take_excess",
+    en: 'Use this form to withdraw excess TON from the NFT collection balance. It sends a mint request to the collection. The request has a “TON amount” field — that amount will move from the collection balance to the NFT balance. Then transfer the NFT to yourself — the excess TON will return to your wallet. For SBT, use the form to send op::take_excess opcode.'
   }),
   schema: z.toJSONSchema(Parser, { target: "draft-7" }),
   toTx: async (input: object) => {

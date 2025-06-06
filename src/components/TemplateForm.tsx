@@ -13,6 +13,7 @@ import { useShareAndRestoreData } from "@/hooks/useShareAndRestoreData";
 import ShareCopyButton from "@/components/ShareCopyButton";
 import { RJSFSchema } from "@rjsf/utils";
 import { t } from "@/getLang";
+import ErrorList from "@/components/from-renders/ErrorList";
 
 const { Paragraph, Title } = Typography
 
@@ -43,28 +44,29 @@ const TemplateForm: React.FC<{ template: TemplateType }> = ({ template }) => {
           templates={{
             ButtonTemplates: { SubmitButton },
             ArrayFieldTemplate,
-            ObjectFieldTemplate
+            ObjectFieldTemplate,
+            ErrorListTemplate: ErrorList,
           }}
           onSubmit={data => {
             onSubmit(data.formData)
           }}
-           // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
           schema={schema as any as RJSFSchema}>
       <div style={{}}>
         <AntdForm.Item>
           <Button loading={loading} type="primary" htmlType="submit">
             {t({
-              en:'Send Transaction',
-              ru:'Отправить транзакцию',
+              en: 'Send Transaction',
+              ru: 'Отправить транзакцию',
             })}
           </Button>
         </AntdForm.Item>
         <AntdForm.Item>
           <Button onClick={onExportCLick} loading={loading} type="default" htmlType="submit">
             {t({
-                en:'Export Transaction to JSON',
-                ru:'Экспортировать транзакцию в JSON',
-              })}
+              en: 'Export Transaction to JSON',
+              ru: 'Экспортировать транзакцию в JSON',
+            })}
           </Button>
         </AntdForm.Item>
       </div>
