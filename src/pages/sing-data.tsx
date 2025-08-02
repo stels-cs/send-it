@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 const MainPage = dynamic(() => import("../components/MainPage"), {
   ssr: false,
 });
-const TemplatePicker = dynamic(() => import("../components/TemplatePicker"), {
+const SingDataForm = dynamic(() => import("../components/SingDataForm"), {
   ssr: false,
 });
 
@@ -14,13 +14,13 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>TON Connect playground</title>
-        <meta name="description" content="Send custom transaction via ton connect " />
+        <title>Sing data</title>
+        <meta name="description" content="Debug sing data" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainPage>
-        <TemplatePicker />
+        <SingDataForm />
       </MainPage>
     </>
   );

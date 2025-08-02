@@ -20,6 +20,8 @@ const { Paragraph, Title } = Typography
 
 const TemplateForm: React.FC<{ template: TemplateType }> = ({ template }) => {
   const schema = useMemo(() => ({
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     ...template.schema,
     $schema: undefined
   }), [ template.schema ])
