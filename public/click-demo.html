@@ -7,5 +7,14 @@
 <body>
 <button onclick="window.open('https://app.tonkeeper.com/ton-connect', '_self', 'noopener noreferrer');">_self</button>
 <button onclick="window.open('https://app.tonkeeper.com/ton-connect', '_blank', 'noopener noreferrer');">_blank</button>
+
+<script>
+    function delayCallOpen() {
+      setTimeout(() => {
+        window.open('https://app.tonkeeper.com/ton-connect', '_self', 'noopener noreferrer');
+      }, 1500)
+    }
+</script>
+<button onclick="delayCallOpen()">delay _self</button>
 </body>
 </html>
