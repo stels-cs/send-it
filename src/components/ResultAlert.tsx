@@ -2,20 +2,27 @@ import React, { useMemo } from "react";
 import { Cell } from "@ton/core";
 import { Typography, Card } from "antd";
 import { t } from "@/getLang";
+import { CHAIN, useTonConnectUI } from "@tonconnect/ui-react";
 const {Link,Paragraph} = Typography
 
 
 const ResultAlert: React.FC<{ boc: string }> = ({ boc }) => {
+  const [ tonConnectUI ] = useTonConnectUI();
+
+  const explorerPrefix = tonConnectUI.account?.chain === CHAIN.MAINNET
+    ? 'https://tonviewer.com'
+    : 'https://testnet.tonviewer.com'
+
   const result = useMemo(() => {
     const txHash = Cell.fromBase64(boc).hash()
-    const txUrl = `https://tonviewer.com/transaction/${txHash.toString('hex')}`
+    const txUrl = `${explorerPrefix}/transaction/${txHash.toString('hex')}`
     return {
       url: txUrl,
       hashBase64: txHash.toString('base64'),
       hashHex: txHash.toString('hex'),
       boc: boc,
     }
-  }, [ boc ])
+  }, [ boc, explorerPrefix ])
 
 
 
