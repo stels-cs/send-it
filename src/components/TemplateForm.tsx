@@ -36,7 +36,7 @@ const TemplateForm: React.FC<{ template: TemplateType }> = ({ template }) => {
     <Title>{template.name}</Title>
     <Paragraph>{template.description}</Paragraph>
     {!!error && <ErrorAlert error={error} clearError={clearError} />}
-    {!!result && <ResultAlert boc={result} />}
+    {!!result && <ResultAlert boc={result.boc} ui={result.ui} />}
     <Form validator={validator}
           disabled={loading}
           onChange={data => {
@@ -55,6 +55,8 @@ const TemplateForm: React.FC<{ template: TemplateType }> = ({ template }) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
           schema={schema as any as RJSFSchema}>
       <div style={{}}>
+        {!!error && <ErrorAlert error={error} clearError={clearError} />}
+        {!!error && <br/>}
         <AntdForm.Item>
           <Button loading={loading} type="primary" htmlType="submit">
             {t({

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+// import classNames from 'classnames';
 import isObject from 'lodash/isObject';
 import isNumber from 'lodash/isNumber';
 import isString from 'lodash/isString';
@@ -14,11 +14,12 @@ import {
   descriptionId,
   getTemplate,
   getUiOptions,
-  titleId,
+  // titleId,
   buttonId,
 } from '@rjsf/utils';
-import { Col, Row, ConfigProvider } from 'antd';
-import { useContext } from 'react';
+import { Col, Row } from 'antd';
+// import { Col, Row, ConfigProvider } from 'antd';
+// import { useContext } from 'react';
 
 const DESCRIPTION_COL_STYLE = {
   paddingBottom: '8px',
@@ -46,14 +47,14 @@ export default function ObjectFieldTemplate<
     onAddClick,
     properties,
     readonly,
-    required,
+    // required,
     registry,
     schema,
-    title,
+    // title,
     uiSchema,
   } = props;
   const uiOptions = getUiOptions<T, S, F>(uiSchema);
-  const TitleFieldTemplate = getTemplate<'TitleFieldTemplate', T, S, F>('TitleFieldTemplate', registry, uiOptions);
+  // const TitleFieldTemplate = getTemplate<'TitleFieldTemplate', T, S, F>('TitleFieldTemplate', registry, uiOptions);
   const DescriptionFieldTemplate = getTemplate<'DescriptionFieldTemplate', T, S, F>(
     'DescriptionFieldTemplate',
     registry,
@@ -63,7 +64,9 @@ export default function ObjectFieldTemplate<
   const {
     ButtonTemplates: { AddButton },
   } = registry.templates;
-  const { colSpan = 24, labelAlign = 'right', rowGutter = 24 } = formContext as GenericObjectType;
+  const { colSpan = 24,
+    // labelAlign = 'right',
+    rowGutter = 24 } = formContext as GenericObjectType;
 
   const findSchema = (element: ObjectFieldTemplatePropertyType): S => element.content.props.schema;
 
@@ -107,30 +110,30 @@ export default function ObjectFieldTemplate<
     return defaultColSpan;
   };
 
-  const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
-  const prefixCls = getPrefixCls('form');
-  const labelClsBasic = `${prefixCls}-item-label`;
-  const labelColClassName = classNames(
-    labelClsBasic,
-    labelAlign === 'left' && `${labelClsBasic}-left`,
-    // labelCol.className,
-  );
+  // const { getPrefixCls } = useContext(ConfigProvider.ConfigContext);
+  // const prefixCls = getPrefixCls('form');
+  // const labelClsBasic = `${prefixCls}-item-label`;
+  // const labelColClassName = classNames(
+  //   labelClsBasic,
+  //   labelAlign === 'left' && `${labelClsBasic}-left`,
+  //   // labelCol.className,
+  // );
 
   return (
     <div id={idSchema.$id}>
       <Row gutter={rowGutter}>
-        {title && (
-          <Col className={labelColClassName} span={24}>
-            <TitleFieldTemplate
-              id={titleId<T>(idSchema)}
-              title={title}
-              required={required}
-              schema={schema}
-              uiSchema={uiSchema}
-              registry={registry}
-            />
-          </Col>
-        )}
+        {/*{title && (*/}
+        {/*  <Col className={labelColClassName} span={24}>*/}
+        {/*    <TitleFieldTemplate*/}
+        {/*      id={titleId<T>(idSchema)}*/}
+        {/*      title={title}*/}
+        {/*      required={required}*/}
+        {/*      schema={schema}*/}
+        {/*      uiSchema={uiSchema}*/}
+        {/*      registry={registry}*/}
+        {/*    />*/}
+        {/*  </Col>*/}
+        {/*)}*/}
         {description && (
           <Col span={24} style={DESCRIPTION_COL_STYLE}>
             <DescriptionFieldTemplate

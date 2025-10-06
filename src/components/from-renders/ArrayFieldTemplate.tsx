@@ -13,9 +13,9 @@ import classNames from 'classnames';
 import { Col, Row, ConfigProvider } from 'antd';
 import { useContext } from 'react';
 
-const DESCRIPTION_COL_STYLE = {
-  paddingBottom: '8px',
-};
+// const DESCRIPTION_COL_STYLE = {
+//   paddingBottom: '8px',
+// };
 
 /** The `ArrayFieldTemplate` component is the template used to render all items in an array.
  *
@@ -44,11 +44,11 @@ export default function ArrayFieldTemplate<
     uiSchema,
   } = props;
   const uiOptions = getUiOptions<T, S, F>(uiSchema);
-  const ArrayFieldDescriptionTemplate = getTemplate<'ArrayFieldDescriptionTemplate', T, S, F>(
-    'ArrayFieldDescriptionTemplate',
-    registry,
-    uiOptions,
-  );
+  // const ArrayFieldDescriptionTemplate = getTemplate<'ArrayFieldDescriptionTemplate', T, S, F>(
+  //   'ArrayFieldDescriptionTemplate',
+  //   registry,
+  //   uiOptions,
+  // );
   const ArrayFieldItemTemplate = getTemplate<'ArrayFieldItemTemplate', T, S, F>(
     'ArrayFieldItemTemplate',
     registry,
@@ -88,17 +88,17 @@ export default function ArrayFieldTemplate<
             />
           </Col>
         )}
-        {(uiOptions.description || schema.description) && (
-          <Col span={24} style={DESCRIPTION_COL_STYLE}>
-            <ArrayFieldDescriptionTemplate
-              description={uiOptions.description || schema.description}
-              idSchema={idSchema}
-              schema={schema}
-              uiSchema={uiSchema}
-              registry={registry}
-            />
-          </Col>
-        )}
+        {/*{(uiOptions.description || schema.description) && (*/}
+        {/*  <Col span={24} style={DESCRIPTION_COL_STYLE}>*/}
+        {/*    <ArrayFieldDescriptionTemplate*/}
+        {/*      description={uiOptions.description || schema.description}*/}
+        {/*      idSchema={idSchema}*/}
+        {/*      schema={schema}*/}
+        {/*      uiSchema={uiSchema}*/}
+        {/*      registry={registry}*/}
+        {/*    />*/}
+        {/*  </Col>*/}
+        {/*)}*/}
         <Col className='row array-item-list' span={24}>
           {items &&
             items.map(({ key, ...itemProps }: ArrayFieldItemTemplateType<T, S, F>) => (

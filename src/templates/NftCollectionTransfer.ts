@@ -1,7 +1,7 @@
 import { Address, beginCell, toNano } from "@ton/core";
 import { z } from "zod/v4";
-import { SendTransactionRequest } from "@tonconnect/sdk";
 import { TemplateType } from "@/templates/type";
+import { createDefaultTonTransaction } from "@/ton/createDefaultTonTransaction";
 
 const Parser = z.object({
   collectionAddress: z.string().meta({
@@ -24,16 +24,10 @@ export const NftCollectionTransfer: TemplateType = {
     .storeAddress(Address.parse(data.newOwnerAddress))
     .endCell();
 
-    const tx: SendTransactionRequest = {
-      validUntil: Date.now() + 1000 * 60 * 5,
-      messages: [
-        {
-          address: Address.parse(data.collectionAddress).toString(),
-          amount: toNano('0.05').toString(),
-          payload: body.toBoc().toString('base64'),
-        }
-      ]
-    }
-    return tx;
+    return createDefaultTonTransaction({
+      to: Address.parse(data.collectionAddress),
+      amount: toNano('0.05'),
+      payload: body,
+    })
   }
 }

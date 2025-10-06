@@ -1,8 +1,8 @@
 import { Address, beginCell, toNano } from "@ton/core";
 import { z } from "zod/v4";
-import { SendTransactionRequest } from "@tonconnect/sdk";
 import { TemplateType } from "@/templates/type";
 import { getQueryId } from "@/ton/getQueryId";
+import { createDefaultTonTransaction } from "@/ton/createDefaultTonTransaction";
 
 const Parser = z.object({
   nftAddress: z.string().meta({
@@ -33,16 +33,10 @@ export const TonDNSSetWallet: TemplateType = {
     }
 
     // https://github.com/ton-blockchain/ton/blob/7e3df93ca2ab336716a230fceb1726d81bac0a06/crypto/block/block.tlb#L827
-    const tx: SendTransactionRequest = {
-      validUntil: Date.now() + 1000 * 60 * 5,
-      messages: [
-        {
-          address: Address.parse(data.nftAddress).toString(),
-          amount: toNano('0.05').toString(),
-          payload: body.endCell().toBoc().toString('base64'),
-        }
-      ]
-    }
-    return tx;
+    return createDefaultTonTransaction({
+      to: Address.parse(data.nftAddress),
+      amount: toNano('0.05'),
+      payload: body.endCell(),
+    })
   }
 }
